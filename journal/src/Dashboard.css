@@ -1,0 +1,374 @@
+/* Dashboard Header Styling */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-9), var(--color-10), transparent);
+  animation: headerShimmer 4s ease-in-out infinite;
+}
+
+@keyframes headerShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.logout-button {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--color-8), var(--color-10));
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.logout-button:hover::before {
+  left: 100%;
+}
+
+.logout-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(135deg, var(--color-4), var(--color-6));
+}
+
+.logout-button:active {
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Header title styling if you have one */
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--color-9), var(--color-10), white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: titleGradient 3s ease infinite;
+  margin: 0;
+}
+
+@keyframes titleGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive header design */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  
+  .dashboard-title {
+    font-size: 22px;
+  }
+  
+  .logout-button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  
+  .dashboard-actions {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .dashboard-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Base Layout */
+body {
+  background: linear-gradient(135deg, var(--color-8), var(--color-6), var(--color-9));
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Feature Cards - Enhanced Space-Filling Design */
+.feature-cards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 30px;
+  perspective: 1000px;
+}
+
+.feature-cards button {
+  padding: 32px 28px;
+  min-height: 140px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, var(--color-1), var(--color-2));
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.feature-cards button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.feature-cards button:hover::before {
+  left: 100%;
+}
+
+.feature-cards button:hover {
+  background: linear-gradient(135deg, var(--color-2), var(--color-3));
+  transform: translateY(-8px) rotateX(10deg);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  scale: 1.02;
+}
+
+.feature-cards button:active {
+  transform: translateY(-4px) rotateX(5deg);
+  scale: 0.98;
+}
+
+/* Enhanced Insights Section */
+.insights-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.insight-box {
+  padding: 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--color-3), var(--color-4));
+  color: white;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform: translateZ(0);
+}
+
+.insight-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-9), var(--color-10), var(--color-9));
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.insight-box:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, var(--color-4), var(--color-5));
+}
+
+.insight-box:nth-child(even) {
+  background: linear-gradient(135deg, var(--color-5), var(--color-6));
+}
+
+.insight-box:nth-child(even):hover {
+  background: linear-gradient(135deg, var(--color-6), var(--color-7));
+}
+
+/* Glass morphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating elements */
+.floating-decoration {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Additional utility classes for enhanced styling */
+.gradient-text {
+  background: linear-gradient(45deg, var(--color-9), var(--color-10), var(--color-1));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: textGradient 4s ease infinite;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Responsive adjustments for feature cards */
+@media (max-width: 768px) {
+  .feature-cards {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .feature-cards button {
+    padding: 28px 24px;
+    min-height: 120px;
+    font-size: 16px;
+  }
+  
+  .insight-box {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  
+  .feature-cards {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+    gap: 16px;
+  }
+  
+  .feature-cards button {
+    min-height: 100px;
+    padding: 24px 20px;
+    font-size: 15px;
+  }
+  
+  .insights-section {
+    margin-top: 30px;
+    gap: 16px;
+  }
+}
+
+/* Theme transition animations */
+* {
+  transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* Enhanced focus states for accessibility */
+.feature-cards button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+  transform: translateY(-4px);
+}
+
+.insight-box:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}

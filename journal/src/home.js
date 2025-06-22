@@ -7,6 +7,7 @@ function Home() {
     const isMobile = window.innerWidth < 480;
 
     return (
+        <div className="home-wrapper no-theme">
         <div className="home-wrapper">
             {/* Auth Buttons */}
             <div className="auth-buttons">
@@ -64,6 +65,7 @@ function Home() {
                     Made with <span style={{ color: "#f72585ff" }}>❤</span> by You
                 </div>
             </footer>
+        </div>
         </div>
     );
 }

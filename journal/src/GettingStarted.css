@@ -1,0 +1,232 @@
+
+.getting-started-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 48px 32px;
+  text-align: center;
+  color: var(--text-color, white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.getting-started-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-1), var(--color-9), var(--color-10));
+  background-size: 200% 100%;
+  animation: topBorderFlow 4s ease-in-out infinite;
+}
+
+@keyframes topBorderFlow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.getting-started-wrapper h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, var(--color-3), var(--color-5), white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: titleGradientFlow 3s ease infinite;
+}
+
+@keyframes titleGradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.getting-started-wrapper p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.onboarding-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 48px;
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.onboarding-steps li {
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.onboarding-steps li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  background: linear-gradient(135deg, var(--color-2), var(--color-3));
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.onboarding-steps {
+  counter-reset: step-counter;
+}
+
+.onboarding-steps li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(8px);
+}
+
+.onboarding-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.onboarding-buttons button {
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 140px;
+}
+
+.onboarding-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.onboarding-buttons button:hover::before {
+  left: 100%;
+}
+
+.onboarding-buttons button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.onboarding-buttons button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.onboarding-buttons .skip-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.onboarding-buttons .skip-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.onboarding-buttons button:not(.skip-btn) {
+  background: linear-gradient(135deg, var(--color-1), var(--color-2));
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.onboarding-buttons button:not(.skip-btn):hover {
+  background: linear-gradient(135deg, var(--color-2), var(--color-3));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .getting-started-wrapper {
+    margin: 20px;
+    padding: 32px 24px;
+  }
+  
+  .getting-started-wrapper h1 {
+    font-size: 28px;
+  }
+  
+  .getting-started-wrapper p {
+    font-size: 16px;
+  }
+  
+  .onboarding-steps {
+    font-size: 16px;
+  }
+  
+  .onboarding-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .onboarding-buttons button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .getting-started-wrapper {
+    margin: 12px;
+    padding: 24px 20px;
+  }
+  
+  .getting-started-wrapper h1 {
+    font-size: 24px;
+  }
+  
+  .onboarding-steps li {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .onboarding-steps li::before {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}

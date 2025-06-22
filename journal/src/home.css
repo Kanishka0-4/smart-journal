@@ -56,6 +56,19 @@
   margin-bottom: 32px;
 }
 
+.no-theme {
+  --color-1: #f72585;
+  --color-2: #b5179e;
+  --color-3: #7209b7;
+  --color-4: #560bad;
+  --color-5: #480ca8;
+  --color-6: #3a0ca3;
+  --color-7: #3f37c9;
+  --color-8: #4361ee;
+  --color-9: #4895ef;
+  --color-10: #4cc9f0;
+}
+
 .cta-button {
   padding: 14px 32px;
   background: linear-gradient(90deg, #f72585 0%, #4895ef 100%);
