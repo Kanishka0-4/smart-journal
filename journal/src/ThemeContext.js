@@ -21,10 +21,10 @@ export const ThemeProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme") || "default";
-    setTheme(stored);
-  }, []);
+    useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved) setTheme(saved);
+    }, [setTheme]);
 
   return (
     <ThemeContext.Provider value={{ themeName, setTheme }}>
