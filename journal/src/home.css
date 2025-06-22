@@ -1,0 +1,167 @@
+/* General Layout */
+.home-wrapper {
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f72585 0%, #4895ef 100%);
+  min-height: 100vh;
+  color: #fff;
+  position: relative;
+  padding-bottom: 48px;
+  overflow-x: hidden;
+}
+
+/* Auth Buttons (Top Right) */
+.auth-buttons {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  z-index: 10;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.pink {
+  background: linear-gradient(90deg, #f72585 0%, #7209b7 100%);
+  color: white;
+}
+
+/* Hero Section */
+.hero-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 96px 24px 48px 24px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: #f1f1f1;
+  margin-bottom: 32px;
+}
+
+.cta-button {
+  padding: 14px 32px;
+  background: linear-gradient(90deg, #f72585 0%, #4895ef 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+
+
+/* How It Works Section */
+.how-it-works {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 24px 16px 24px;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.how-it-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-icon {
+  font-size: 36px;
+}
+
+.step-label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.step-arrow {
+  font-size: 32px;
+  color: #fff;
+}
+
+/* Footer */
+.footer {
+  margin-top: 48px;
+  padding: 24px 0 12px 0;
+  background: linear-gradient(90deg, #f72585 0%, #4895ef 100%);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -2px 16px 0 rgba(58, 12, 163, 0.2);
+}
+
+.footer-love {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .cta-button {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .carousel-title {
+    font-size: 24px;
+  }
+
+  .how-it-works h2 {
+    font-size: 22px;
+  }
+
+  .step-arrow {
+    font-size: 24px;
+  }
+
+  .auth-buttons {
+    right: 16px;
+    top: 16px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}

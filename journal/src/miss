@@ -1,0 +1,36 @@
+<div style={{ display: "flex", justifyContent: "center", gap: 18, flexWrap: "wrap" }}>
+          <a href="/login" style={{
+            padding: "14px 32px",
+            background: "linear-gradient(90deg, #f72585ff 0%, #7209b7ff 100%)",
+            color: "#fff",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: 700,
+            fontSize: 18,
+            boxShadow: "0 4px 14px 0 #f7258533",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}>🔐 Log In</a>
+          <a href="/signup" style={{
+            padding: "14px 32px",
+            background: "linear-gradient(90deg, #43e97b 0%, #38f9d7 100%)",
+            color: "#222",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: 700,
+            fontSize: 18,
+            boxShadow: "0 4px 14px 0 #43e97b33",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}>📝 Sign Up</a>
+          <a href="#features" style={{
+            padding: "14px 32px",
+            background: "#fff",
+            color: "#4895efff",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: 700,
+            fontSize: 18,
+            boxShadow: "0 4px 14px 0 #4895ef33",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}>📖 Learn More</a>
+        </div>
+      </section>

@@ -1,0 +1,87 @@
+.carousel-wrapper {
+  width: 100%;
+  padding: 32px 16px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 24px;
+  padding: 8px 24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-card {
+  flex: 0 0 80%;
+  max-width: 300px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  scroll-snap-align: center;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.carousel-card:hover {
+  transform: translateY(-6px);
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.carousel-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.carousel-card p {
+  font-size: 15px;
+  color: #f1f1f1;
+}
+
+/* Optional: Scroll shadow hint for overflow */
+.carousel-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+  pointer-events: none;
+}
+
+/* Desktop: More visible cards */
+@media screen and (min-width: 768px) {
+  .carousel-card {
+    flex: 0 0 260px;
+  }
+
+  .carousel-track {
+    justify-content: center;
+  }
+}
