@@ -15,7 +15,7 @@ const Login = ({ onSwitch }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch("https://smart-journal-backend.onrender.com/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -30,7 +30,7 @@ const Login = ({ onSwitch }) => {
 
       localStorage.setItem("token", data.token);
 
-      const entriesRes = await fetch("http://localhost:5000/api/entries", {
+      const entriesRes = await fetch("https://smart-journal-backend.onrender.com/api/entries", {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
@@ -102,7 +102,7 @@ const SignUp = ({ onSwitch }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch("https://smart-journal-backend.onrender.com/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -117,7 +117,7 @@ const SignUp = ({ onSwitch }) => {
 
       localStorage.setItem("token", data.token);
       setLoading(false);
-      window.open("/getting-started", "_blank");
+      window.open("/getting-started", "_self");
     } catch (err) {
       setLoading(false);
       setError("Network error");
