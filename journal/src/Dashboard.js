@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import {jwtDecode} from "jwt-decode";
 import "./Dashboard.css";
 
 export default function Dashboard() {
@@ -13,20 +12,22 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUserName(decoded.name || "");
-      } catch (err) {
-        console.error("Failed to decode token");
-      }
-    }
+      // Fetch user profile from backend
+      fetch("https://smart-journal-backend.onrender.com/api/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setUserName(data.name || ""))
+        .catch(() => setUserName(""));
 
-    fetch("https://smart-journal-backend.onrender.com/api/entries", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setEntries(data.entries || []))
-      .catch(() => setEntries([]));
+      // Fetch entries
+      fetch("https://smart-journal-backend.onrender.com/api/entries", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setEntries(data.entries || []))
+        .catch(() => setEntries([]));
+    }
 
     setQuizCompleted(false);
     setHabitsTracked(false);
@@ -36,7 +37,7 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/"; // Redirect to home
+    window.location.href = "/";
   };
 
   return (
