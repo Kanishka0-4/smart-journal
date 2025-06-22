@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import "./Dashboard.css";
 
 export default function Dashboard() {
@@ -21,7 +21,7 @@ export default function Dashboard() {
       }
     }
 
-    fetch("/api/journal", {
+    fetch("https://smart-journal-backend.onrender.com/api/entries", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
