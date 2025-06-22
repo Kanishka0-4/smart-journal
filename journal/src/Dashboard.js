@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import jwtDecode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import "./Dashboard.css";
 
 export default function Dashboard() {
