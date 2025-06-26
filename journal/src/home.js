@@ -43,7 +43,7 @@ function Home() {
                     {[
                         { icon: "📝", label: "1. Sign Up" },
                         { icon: "📅", label: "2. Log Daily Health" },
-                        { icon: "🧠", label: "3. Get Smart Insights" },
+                        { icon: "🧠", label: "3. Get Smart Insights (coming soon...) " },
                     ].map((step, i) => (
                         <React.Fragment key={i}>
                             <div className="step">

@@ -21,7 +21,7 @@ export default function Dashboard() {
       }
     }
 
-    fetch("https://smart-journal-backend.onrender.com/api/entries", {
+    fetch("http://localhost:5000/api/entries", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -53,7 +53,7 @@ export default function Dashboard() {
 
       {!hasActivity ? (
         <div className="feature-cards">
-          <button onClick={() => (window.location.href = "/entry/new")}>📓 Start Journal</button>
+          <button onClick={() => (window.location.href = "/journalEntry")}>📓 Start Journal</button>
           <button onClick={() => alert("Quiz coming soon!")}>🧠 Daily Quiz</button>
           <button onClick={() => alert("Habit Tracker coming soon!")}>📊 Habit Tracker</button>
           <button onClick={() => alert("Planner coming soon!")}>📅 Daily Planner</button>

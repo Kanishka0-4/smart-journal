@@ -15,7 +15,7 @@ const Login = ({ onSwitch }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://smart-journal-backend.onrender.com/api/login", {
+      const res = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -30,7 +30,7 @@ const Login = ({ onSwitch }) => {
 
       localStorage.setItem("token", data.token);
 
-      const entriesRes = await fetch("https://smart-journal-backend.onrender.com/api/entries", {
+      const entriesRes = await fetch("http://localhost:5000/api/entries", {
         headers: { Authorization: `Bearer ${data.token}` },
       });
 
@@ -102,7 +102,7 @@ const SignUp = ({ onSwitch }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://smart-journal-backend.onrender.com/api/signup", {
+      const res = await fetch("http://localhost:5000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -125,7 +125,12 @@ const SignUp = ({ onSwitch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form
+      onSubmit={handleSubmit}
+      className="form"
+      autoComplete="off"
+      noValidate
+    >
       <h1 className="form-title">Sign Up</h1>
       <input
         className="form-input"
@@ -134,6 +139,10 @@ const SignUp = ({ onSwitch }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
+        minLength={2}
+        maxLength={50}
+        pattern="^[a-zA-Z\s]+$"
+        title="Name should only contain letters and spaces"
       />
       <input
         className="form-input"
@@ -142,6 +151,8 @@ const SignUp = ({ onSwitch }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+        title="Please enter a valid email address"
       />
       <input
         className="form-input"
@@ -150,6 +161,9 @@ const SignUp = ({ onSwitch }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
+        minLength={6}
+        maxLength={100}
+        title="Password must be at least 6 characters"
       />
       <input
         className="form-input"
@@ -158,6 +172,9 @@ const SignUp = ({ onSwitch }) => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
+        minLength={6}
+        maxLength={100}
+        title="Passwords must match"
       />
       <button className="form-button" type="submit" disabled={loading}>
         {loading ? "Signing up..." : "Sign Up"}

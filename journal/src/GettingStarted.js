@@ -20,7 +20,7 @@ export default function GettingStarted() {
       </div>
 
       <div className="onboarding-buttons">
-        <button onClick={() => navigate("/entry/new")}>Start Journaling</button>
+        <button onClick={() => navigate("/journalEntry")}>Start Journaling</button>
         <button onClick={() => navigate("/dashboard")} className="skip-btn">Skip to Dashboard</button>
       </div>
     </div>

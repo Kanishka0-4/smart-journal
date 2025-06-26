@@ -1,0 +1,148 @@
+
+
+#journal-entry-wrapper {
+  background-color: var(--color-6);
+  min-height: 100vh;
+  width: 80;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 10px;
+}
+
+.journal-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.journal-title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--color-1);
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  border-width: 2px;;
+  border-color: (--color-4);
+}
+
+.journal-subtitle {
+  font-size: 1rem;
+  color: var(--color-3);
+  opacity: 0.75;
+}
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.journal-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.journal-textarea {
+  width: 95%;
+  min-height: 180px;
+  padding: 1rem;
+  border: 2px solid var(--color-8);
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  outline: none;
+}
+
+.journal-textarea:focus {
+  border-color: var(-color-4);
+  box-shadow: 0 0 0 2px rgba(56, 142, 60, 0.2);
+}
+
+.journal-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.typing-indicator {
+  font-style: italic;
+  color: var(--accent-color);
+  margin-left: auto;
+  margin-top: 0.25rem;
+}
+
+.journal-error {
+  color: var(--error-color);
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+
+.journal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.save-button,
+.back-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: var(--accent-color);
+}
+
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.back-button {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.back-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.journal-quote {
+  margin-top: 2rem;
+  font-style: italic;
+  color: var(--text-color);
+  opacity: 0.7;
+  text-align: center;
+}
+
+.journal-quote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-weight: 500;
+}

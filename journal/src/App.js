@@ -4,7 +4,8 @@ import Home from "./home";
 import AuthPage from "./authPage"; 
 import Dashboard from "./Dashboard";
 import GettingStarted from "./GettingStarted";
-import { ThemeProvider } from "./ThemeContext";
+import { ThemeProvider } from "./ThemeContext";``
+import JournalEntry from "./journalEntry";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
         />
         <Route
            path="/getting-started" element={<GettingStarted />} />
+           <Route
+           path="/journalEntry" element={<JournalEntry />} />
 
       </Routes>
     </Router>
