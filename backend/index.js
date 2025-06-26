@@ -14,21 +14,22 @@ app.use(cors());
 app.use(express.json());
 
 let db;
-MongoClient.connect(MONGO_URI, { useUnifiedTopology: true })
+MongoClient.connect(MONGO_URI)
   .then(client => {
-    db = client.db(); // Uses DB from URI
+    db = client.db(); // Or db = client.db("smart-journal");
     app.listen(PORT, () => console.log(`✅ Backend running on port ${PORT}`));
   })
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
+// ✅ Auth Middleware
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']; // Format: Bearer <token>
+  const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'Missing token' });
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) return res.status(403).json({ message: 'Invalid token' });
-    req.user = user; // attaches { userId, email }
+    req.user = user;
     next();
   });
 }
@@ -47,7 +48,6 @@ app.post('/api/signup', async (req, res) => {
   const hashed = await bcrypt.hash(password, 10);
   const result = await users.insertOne({ name, email, password: hashed });
 
-  // Optional: auto login after signup
   const token = jwt.sign(
     { userId: result.insertedId, email, name },
     JWT_SECRET,
@@ -73,16 +73,15 @@ app.post('/api/login', async (req, res) => {
     return res.status(400).json({ message: 'Invalid credentials' });
 
   const token = jwt.sign(
-  { userId: user._id, email: user.email, name: user.name },
-  JWT_SECRET,
-  { expiresIn: '2h' }
-);
-
+    { userId: user._id, email: user.email, name: user.name },
+    JWT_SECRET,
+    { expiresIn: '2h' }
+  );
 
   res.status(200).json({ message: 'Login successful', token });
 });
 
-// ✅ GET entries for the user (used in frontend to detect if user is new)
+// ✅ Get Journal Entries (for Dashboard)
 app.get('/api/entries', authenticateToken, async (req, res) => {
   try {
     const entries = await db.collection('entries').find({
@@ -96,16 +95,39 @@ app.get('/api/entries', authenticateToken, async (req, res) => {
   }
 });
 
-// ✅ Example Dashboard Route
+// ✅ Save New Journal Entry
+app.post('/api/entries', authenticateToken, async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    if (!text || !text.trim()) {
+      return res.status(400).json({ message: "Entry cannot be empty" });
+    }
+
+    const entry = {
+      userId: new ObjectId(req.user.userId),
+      text: text.trim(),
+      createdAt: new Date()
+    };
+
+    const result = await db.collection('entries').insertOne(entry);
+    res.status(201).json({ message: "Entry saved", entryId: result.insertedId });
+  } catch (err) {
+    console.error("❌ Error saving entry:", err);
+    res.status(500).json({ message: "Error saving entry" });
+  }
+});
+
+// ✅ Dashboard Example Route
 app.get('/api/dashboard', authenticateToken, (req, res) => {
   res.json({ message: `Hello user ${req.user.userId}, your email is ${req.user.email}` });
 });
 
+// ✅ Profile Info Route
 app.get('/api/profile', authenticateToken, async (req, res) => {
-  res.json({ 
-    userId: req.user.userId, 
-    email: req.user.email, 
-    name: req.user.name 
+  res.json({
+    userId: req.user.userId,
+    email: req.user.email,
+    name: req.user.name
   });
 });
-
