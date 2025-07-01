@@ -1,0 +1,222 @@
+/* DailyQuiz.css */
+
+.quiz-wrapper {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg,var(--color-1) 0%, var(--color-4) 100%);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  color: linear-gradient(135deg,var(--color-5) 0%, var(--color-8) 100%);
+ font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+.quiz-wrapper h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quiz-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-form input[type="text"],
+.quiz-form select {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-2);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-form input[type="text"]:focus,
+.quiz-form select:focus {
+  outline: none;
+  background: white;
+  box-shadow: linear-gradient(135deg,var(--color-1) 0%, var(--color-4) 100%);
+  transform: translateY(-2px);
+}
+
+.quiz-form input[type="text"]::placeholder {
+  color: var(--color-2);
+}
+
+/* Checkbox styling */
+.quiz-form input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-top: 0.25rem;
+  align-self: flex-start;
+}
+
+.quiz-form input[type="checkbox"]:checked {
+  background: white;
+  border-color: white;
+}
+
+.quiz-form input[type="checkbox"]:checked::before {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-3);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.quiz-form input[type="checkbox"]:hover {
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Checkbox label alignment */
+.quiz-form label:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quiz-form button[type="submit"], button[type="button"] {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--color-5), var(--color-8));
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px var(--color-5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quiz-form button[type="submit"]:hover, button[type="button"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(238, 90, 82, 0.6);
+  background: linear-gradient(135deg, var(--color-4), var(--color-5));
+}
+
+.quiz-form button[type="submit"]:active, button[type="button"]:active {
+  transform: translateY(-1px);
+}
+
+.quiz-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Select dropdown styling */
+.quiz-form select {
+  cursor: pointer;
+}
+
+.quiz-form select option {
+  background: white;
+  color: #333;
+  padding: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .quiz-wrapper {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .quiz-wrapper h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .quiz-form {
+    gap: 1.25rem;
+  }
+  
+  .quiz-form input[type="text"],
+  .quiz-form select {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .quiz-form button[type="submit"] {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-wrapper {
+    padding: 1rem;
+  }
+  
+  .quiz-wrapper h2 {
+    font-size: 1.5rem;
+  }
+  
+  .quiz-form input[type="text"],
+  .quiz-form select,
+  .quiz-form button[type="submit"] {
+    font-size: 0.9rem;
+  }
+}
+
+.scale-group {
+  margin-bottom: 1.2rem;
+}
+
+.scale-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.scale-options {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.scale-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.scale-option input {
+  margin-bottom: 0.2rem;
+}

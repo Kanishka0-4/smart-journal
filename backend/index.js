@@ -16,7 +16,7 @@ app.use(express.json());
 let db;
 MongoClient.connect(MONGO_URI)
   .then(client => {
-    db = client.db(); // Or db = client.db("smart-journal");
+    db = client.db(); // You can specify your DB name if needed: client.db("smart-journal")
     app.listen(PORT, () => console.log(`✅ Backend running on port ${PORT}`));
   })
   .catch(err => console.error('❌ MongoDB connection error:', err));
@@ -81,12 +81,14 @@ app.post('/api/login', async (req, res) => {
   res.status(200).json({ message: 'Login successful', token });
 });
 
-// ✅ Get Journal Entries (for Dashboard)
+// ✅ Get Journal Entries (sorted by newest first)
 app.get('/api/entries', authenticateToken, async (req, res) => {
   try {
     const entries = await db.collection('entries').find({
       userId: new ObjectId(req.user.userId)
-    }).toArray();
+    })
+    .sort({ createdAt: -1 }) // newest first
+    .toArray();
 
     res.json({ entries });
   } catch (err) {
@@ -95,10 +97,10 @@ app.get('/api/entries', authenticateToken, async (req, res) => {
   }
 });
 
-// ✅ Save New Journal Entry
+// ✅ Save New Journal Entry (with title)
 app.post('/api/entries', authenticateToken, async (req, res) => {
   try {
-    const { text } = req.body;
+    const { text, title } = req.body;
 
     if (!text || !text.trim()) {
       return res.status(400).json({ message: "Entry cannot be empty" });
@@ -106,6 +108,7 @@ app.post('/api/entries', authenticateToken, async (req, res) => {
 
     const entry = {
       userId: new ObjectId(req.user.userId),
+      title: title?.trim() || "Untitled Entry",
       text: text.trim(),
       createdAt: new Date()
     };
@@ -130,4 +133,88 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
     email: req.user.email,
     name: req.user.name
   });
+});
+
+// ✅ Daily Quiz Submission
+app.post("/api/quiz", authenticateToken, async (req, res) => {
+  const { mood, healthIssues, tookCare, eatingHabit } = req.body;
+
+  if (!mood || !eatingHabit || typeof tookCare === "undefined") {
+    return res.status(400).json({ message: "Missing fields" });
+  }
+
+  try {
+    const quiz = {
+      userId: new ObjectId(req.user.userId),
+      mood,
+      healthIssues,
+      tookCare,
+      eatingHabit,
+      date: new Date(),
+    };
+
+    await db.collection("quizzes").insertOne(quiz);
+    res.status(201).json({ message: "Quiz submitted successfully" });
+  } catch (err) {
+    console.error("❌ Error saving quiz:", err);
+    res.status(500).json({ message: "Error saving quiz" });
+  }
+});
+
+// ✅ Get a single entry
+app.get('/api/entries/:id', authenticateToken, async (req, res) => {
+  try {
+    const entry = await db.collection('entries').findOne({
+      _id: new ObjectId(req.params.id),
+      userId: new ObjectId(req.user.userId)
+    });
+
+    if (!entry) return res.status(404).json({ message: "Entry not found" });
+    res.json(entry);
+  } catch (err) {
+    console.error("❌ Error fetching entry:", err);
+    res.status(500).json({ message: "Error fetching entry" });
+  }
+});
+
+// ✅ Edit/Update entry
+app.put('/api/entries/:id', authenticateToken, async (req, res) => {
+  const { text, title } = req.body;
+
+  if (!text?.trim() || !title?.trim()) {
+    return res.status(400).json({ message: "Text and title are required" });
+  }
+
+  try {
+    const result = await db.collection('entries').updateOne(
+      { _id: new ObjectId(req.params.id), userId: new ObjectId(req.user.userId) },
+      { $set: { text: text.trim(), title: title.trim(), updatedAt: new Date() } }
+    );
+
+    if (result.matchedCount === 0)
+      return res.status(404).json({ message: "Entry not found or unauthorized" });
+
+    res.json({ message: "Entry updated" });
+  } catch (err) {
+    console.error("❌ Error updating entry:", err);
+    res.status(500).json({ message: "Error updating entry" });
+  }
+});
+
+// ✅ Delete entry
+app.delete('/api/entries/:id', authenticateToken, async (req, res) => {
+  try {
+    const result = await db.collection('entries').deleteOne({
+      _id: new ObjectId(req.params.id),
+      userId: new ObjectId(req.user.userId)
+    });
+
+    if (result.deletedCount === 0)
+      return res.status(404).json({ message: "Entry not found or unauthorized" });
+
+    res.json({ message: "Entry deleted" });
+  } catch (err) {
+    console.error("❌ Error deleting entry:", err);
+    res.status(500).json({ message: "Error deleting entry" });
+  }
 });

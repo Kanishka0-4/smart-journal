@@ -4,7 +4,7 @@ import HomeFeaturesCarousel from "./carousel";
 import "./home.css";
 
 function Home() {
-    const isMobile = window.innerWidth < 480;
+    
 
     return (
         <div className="home-wrapper no-theme">
@@ -18,10 +18,10 @@ function Home() {
             {/* Hero Section */}
             <section className="hero-section">
                 <h1 className="hero-title">
-                    Your Personal Smart Health Journal
+                    Your Personal Health Journal
                 </h1>
                 <p className="hero-subtitle">
-                    Track your mood, sleep, diet, and more—get smart health insights powered by AI.
+                    Track your mood, sleep, diet, and more.
                 </p>
                 <Link
                     to="/signup"
@@ -59,7 +59,7 @@ function Home() {
             {/* Footer */}
             <footer className="footer">
                 <div>
-                    &copy; {new Date().getFullYear()} Smart Health Journal &mdash; All rights reserved.
+                    &copy; {new Date().getFullYear()} Health Journal &mdash; All rights reserved.
                 </div>
                 <div className="footer-love">
                     Made with <span style={{ color: "#f72585ff" }}>❤</span> by You

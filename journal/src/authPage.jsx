@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./authPage.css";
 
 const Login = ({ onSwitch }) => {
@@ -7,7 +6,7 @@ const Login = ({ onSwitch }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,18 +29,9 @@ const Login = ({ onSwitch }) => {
 
       localStorage.setItem("token", data.token);
 
-      const entriesRes = await fetch("http://localhost:5000/api/entries", {
-        headers: { Authorization: `Bearer ${data.token}` },
-      });
-
-      const entriesData = await entriesRes.json();
+    
+      window.open("/", "_blank");
       setLoading(false);
-
-      if (entriesData.entries && entriesData.entries.length > 0) {
-        navigate("/dashboard");
-      } else {
-        navigate("/getting-started");
-      }
     } catch (err) {
       setLoading(false);
       setError("Network error");
@@ -88,7 +78,6 @@ const SignUp = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -117,7 +106,8 @@ const SignUp = ({ onSwitch }) => {
 
       localStorage.setItem("token", data.token);
       setLoading(false);
-      window.open("/getting-started", "_self");
+      // Open home page in a new tab after signup
+      window.open("/", "_blank");
     } catch (err) {
       setLoading(false);
       setError("Network error");
@@ -182,9 +172,7 @@ const SignUp = ({ onSwitch }) => {
       {error && <div className="form-error">{error}</div>}
       <p className="form-footer">
         Already have an account?{" "}
-        <span className="form-link" onClick={onSwitch}>
-          Login
-        </span>
+        <span className="form-link" onClick={onSwitch}>Login</span>
       </p>
     </form>
   );
@@ -192,7 +180,6 @@ const SignUp = ({ onSwitch }) => {
 
 const AuthPage = () => {
   const [showLogin, setShowLogin] = useState(true);
-  const navigate = useNavigate();
 
 
   return showLogin ? (
