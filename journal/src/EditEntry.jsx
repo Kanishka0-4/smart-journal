@@ -1,70 +1,91 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "./EditEntry.css";
 
 export default function EditEntry() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [error, setError] = useState("");
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/api/entries/${id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.title) setTitle(data.title);
-        if (data.text) setText(data.text);
-      })
-      .catch(() => setError("Failed to load entry"));
-  }, [id]);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
+  // Load existing entry data
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
 
-    if (!text.trim() || !title.trim()) {
-      setError("Title and text required");
-      return;
-    }
+    fetch(`http://localhost:5000/api/entries/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setTitle(data.title || "");
+        setText(data.text || "");
+      })
+      .catch(() => setError("Failed to load entry"));
+  }, [id, navigate]);
 
-    const res = await fetch(`http://localhost:5000/api/entries/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ title, text })
-    });
+  // Handle update
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setError("");
 
-    if (res.ok) {
-      navigate("/dashboard");
-    } else {
-      setError("Failed to update entry");
-    }
-  };
+    if (!title.trim() || !text.trim()) {
+      setError("Title and text are required");
+      return;
+    }
 
-  return (
-    <div className="edit-entry-wrapper">
-      <h2>Edit Entry</h2>
-      <form onSubmit={handleUpdate}>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-        />
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Edit your thoughts..."
-        />
-        {error && <div className="error">{error}</div>}
-        <button type="submit">💾 Update</button>
-        <button type="button" onClick={() => navigate("/dashboard")}>↩️ Cancel</button>
-      </form>
-    </div>
-  );
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/entries/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, text }),
+      });
+
+      if (res.ok) {
+        navigate("/dashboard");
+      } else {
+        setError("Failed to update entry");
+      }
+    } catch {
+      setError("Network error while updating");
+    }
+  };
+
+  return (
+    <div className="edit-entry-wrapper">
+      <h2>Edit Entry</h2>
+
+      <form onSubmit={handleUpdate}>
+        <input
+          type="text"
+          value={title}
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <textarea
+          value={text}
+          placeholder="Edit your thoughts..."
+          onChange={(e) => setText(e.target.value)}
+        />
+
+        {error && <div className="error">{error}</div>}
+
+        <button type="submit">💾 Update</button>
+        <button type="button" onClick={() => navigate("/dashboard")}>
+          ↩️ Cancel
+        </button>
+      </form>
+    </div>
+  );
 }

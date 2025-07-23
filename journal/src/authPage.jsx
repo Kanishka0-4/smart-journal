@@ -30,7 +30,7 @@ const Login = ({ onSwitch }) => {
       localStorage.setItem("token", data.token);
 
     
-      window.open("/", "_blank");
+      window.open("/Dashboard", "_blank");
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -107,7 +107,7 @@ const SignUp = ({ onSwitch }) => {
       localStorage.setItem("token", data.token);
       setLoading(false);
       // Open home page in a new tab after signup
-      window.open("/", "_blank");
+      window.open("/GettingStarted", "_blank");
     } catch (err) {
       setLoading(false);
       setError("Network error");
